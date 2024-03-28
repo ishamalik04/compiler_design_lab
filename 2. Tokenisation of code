@@ -1,0 +1,36 @@
+%{
+#include<stdio.h>
+int key=0,valid=0,nvalid=0,operator=0,delimeters=0;
+%}
+%%
+"int"|"float"|"if"|"else"|"for"|"printf" {printf("\n%s is a keyword",yytext);key++;}
+[=+*/!?]+ {printf("\n%s is an operator",yytext);operator++;}
+[{};(,)] {printf("\n%s is delimeter",yytext);delimeters++;}
+[a-zA-Z_][a-zA-Z0-9]* {printf("\n%s is a valid identifier",yytext);valid++;}
+[0-9]+ {printf("\n%s is integer value",yytext);nvalid++;}
+"{" {printf("\n is block begin",yytext);}
+"}" {printf("\n is block end",yytext);}
+'#'|'#line'|'#define'|'#include' {printf("\n is preprocessor");}
+"for"|"while"|"do" {printf("\n is iterator");}
+. {;}
+
+%%
+yywrap(){}
+int main(int arg,char* argc[])
+{
+extern FILE*yyin;
+yyin=fopen(argc[1],"r");
+yylex();
+
+printf("\nnumber of keywords are %d",key);
+printf("\nnumber of operators are %d",operator);
+printf("\nnumber of delimeters are %d",delimeters);
+printf("\nnumber of valid identifiers are %d",valid);
+printf("\nnumber of integer values are %d",nvalid);
+return 0;
+}
+
+
+
+
+
