@@ -1,0 +1,19 @@
+%{
+#include<stdio.h>
+%}
+%%
+["int" || "float" || "if" || "else"]+ {printf("\nit is a keyword");}
+^[a-zA-Z_]+[a-zA-Z0-9]* {printf("\nvalid identifier");}
+^[0-9][a-zA-Z]+ {printf("\nnot valid identifier");}
+. {;}
+
+%%
+yywrap(){}
+int main()
+{
+yylex();
+
+return 0;
+}
+
+
