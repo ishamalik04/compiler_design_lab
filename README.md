@@ -18,6 +18,13 @@ The repository includes various programs implemented in Lex/Flex and Yacc/Bison 
 
 ## Usage
 
+- save the file with yourProgramName.l
+- run following commands on terminal
+
+   1. lex yourProgramName.l
+   2. gcc lex.yy.c
+   3. ./a.out
+
 Each program in this repository may have its own directory containing the source code files and any necessary resources. Follow the instructions provided in the respective program's README file to compile and execute the programs.
 
 ## Contribution
