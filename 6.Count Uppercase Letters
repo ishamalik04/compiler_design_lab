@@ -1,0 +1,15 @@
+%{
+#include<stdio.h>
+int count=0;
+%}
+%%
+[A-Z] {printf("\n%s is in UpperCase",yytext);count++;}
+. ;
+%% 
+int yywrap(){}
+int main()
+{
+yylex();
+printf("\nCount of uppercase letters = %d",count);
+return 0;
+}
