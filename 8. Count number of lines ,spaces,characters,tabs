@@ -1,0 +1,18 @@
+%{
+#include<stdio.h>
+int spaces=0,lines=1,tabs=0,others=0,chars=1;
+%}
+%%
+[\n] {lines++;}
+[ ]  {spaces++;}
+[\t] {tabs++;}
+[a-zA-Z0-9] {chars++;}
+. {others++;}
+
+%%
+int yywrap(){}
+int main(){
+yylex();
+printf("\nSpaces = %d\n Lines = %d\nTabs = %d\nCharacters = %d\nOthers =%d\n",spaces,lines,tabs,chars,others);
+return 0;
+}
