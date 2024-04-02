@@ -1,0 +1,15 @@
+%{
+#include<stdio.h>
+%}
+DIGIT [0-9]
+%%
+{DIGIT}* {ECHO;printf("Integer");}
+{DIGIT}*?\.{DIGIT}* {ECHO;printf("FLOAT");}
+%% 
+int yywrap() {}
+int main(int agrc,char*argv[])
+{
+extern FILE*yyin;
+yyin=fopen(argv[1],"r");
+yylex();
+}
