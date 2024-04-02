@@ -1,0 +1,23 @@
+%{
+int count=0;
+%}
+op [+-*/]
+letter [a-zA-Z]
+digit [0-9]
+id {letter}*|({letter}{digit})+
+notid ({digit}{letter})+ 
+%%
+[\t\n]+
+("int")|("float")|("char")|("case")|("default")|("if")|("for")|("printf")|("scanf") {printf("%s is a keyword\n",yytext);}
+{id} {printf("\n%s is an identifier\n",yytext);count++;}
+{notid} {printf("%s is not an identifier\n",yytext);}
+%%
+int yywrap(){}
+int main(int argc,char*argv[])
+{
+extern FILE*yyin;
+yyin=fopen(argv[1],"r");
+yylex();
+printf("\nTotal identifiers %d",count);
+return 0;
+}
