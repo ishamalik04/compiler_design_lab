@@ -1,0 +1,19 @@
+%{
+#include<stdio.h>
+int ln=0,ch=0,space=0,wr=0;
+%}
+%%
+[\n] {ln++;wr++;}
+[\t] {space++;wr++;}
+[" "] {space++;wr++;}
+[^n\t] {ch++;}
+%%
+int yywrap(){}
+int main(int argc,char *argv[])
+{
+extern FILE*yyin;
+yyin=fopen(argv[1],"r");
+yylex();
+printf("\nlines:%d\nwords:%d\ncharacters:%d\nblank:%d",ln,wr,ch,space);
+return 0;
+}
