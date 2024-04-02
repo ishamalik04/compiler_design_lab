@@ -1,0 +1,16 @@
+%{
+#include<stdio.h>
+%}
+%%
+[ \n\t]+ { fprintf(yyout, " ");}
+.       { fprintf(yyout, "%s", yytext);}
+%%
+int yywrap(){}
+int main(int argc,char*argv[])
+{
+extern FILE*yyin,*yyout;
+yyin=fopen(argv[1],"r");
+yyout = fopen("Output.txt", "w");
+yylex();
+return 0;
+}
